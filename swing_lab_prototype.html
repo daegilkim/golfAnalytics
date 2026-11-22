@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101916">
+<title>스윙랩 | 골프 스윙 분석</title>
+<style>
+:root{--bg:#0d1512;--panel:#16221d;--panel2:#1d2c25;--line:#2d4036;--text:#edf5ef;--muted:#a6b7ac;--green:#a9e56b;--lime:#d0f29a;--orange:#ffbd70;--blue:#86c9ff}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(160deg,#101b16,#0b110f 65%);color:var(--text);font:15px/1.45 system-ui,-apple-system,"Noto Sans KR",sans-serif}
+button,input{font:inherit}button{cursor:pointer;border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:12px;padding:11px 13px;font-weight:650}button:active{transform:scale(.98)}button.primary{background:var(--green);color:#142012;border-color:var(--green)}button.ghost{background:transparent}button.active{outline:2px solid var(--green);border-color:var(--green)}button:disabled{opacity:.45;cursor:not-allowed}
+header{padding:18px max(16px,env(safe-area-inset-left));display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #26372e;position:sticky;top:0;background:#101914ed;backdrop-filter:blur(14px);z-index:5}
+.brand{display:flex;gap:10px;align-items:center;font-weight:850;letter-spacing:.2px}.logo{width:34px;height:34px;border-radius:11px;background:var(--green);color:#142012;display:grid;place-items:center;font-size:19px}.brand small{display:block;color:var(--muted);font-size:10px;font-weight:600;letter-spacing:1.3px}
+.header-tag{font-size:11px;color:var(--green);border:1px solid #47613b;padding:6px 9px;border-radius:30px}
+main{max-width:1180px;margin:auto;padding:20px 16px 54px}.intro{display:flex;justify-content:space-between;gap:16px;align-items:end;margin:5px 0 18px}.intro h1{font-size:clamp(23px,4vw,32px);margin:0 0 5px;letter-spacing:-.8px}.intro p{margin:0;color:var(--muted);font-size:13px}.layout{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(280px,.9fr);gap:16px;align-items:start}
+.panel{background:linear-gradient(160deg,#18251f,#131d18);border:1px solid var(--line);border-radius:18px;overflow:hidden}.panel-head{padding:15px 16px;border-bottom:1px solid #293a30;display:flex;justify-content:space-between;align-items:center;gap:10px}.panel-head h2{font-size:15px;margin:0}.sub{color:var(--muted);font-size:11px}.stage-wrap{padding:12px}.stage{position:relative;background:#080d0a;border-radius:12px;overflow:hidden;aspect-ratio:16/9;display:grid;place-items:center;touch-action:manipulation}.stage video{width:100%;height:100%;object-fit:contain;display:block}.stage canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--muted);text-align:center;padding:20px}.empty .glyph{font-size:38px}.empty strong{color:var(--text)}.empty button{margin-top:4px}
+.video-controls{padding:0 14px 14px}.scrub{width:100%;accent-color:var(--green)}.control-row{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-top:5px}.control-row .left,.control-row .right{display:flex;align-items:center;gap:7px}.time{font-variant-numeric:tabular-nums;color:var(--muted);font-size:12px}.small-btn{padding:8px 10px;font-size:12px}
+.side{display:grid;gap:14px}.section{padding:15px}.section h3{font-size:14px;margin:0 0 5px}.section p{font-size:12px;color:var(--muted);margin:0 0 12px}.stack{display:grid;gap:8px}.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}.field-label{font-size:11px;color:var(--muted);display:block;margin-bottom:5px}.range{width:100%;accent-color:var(--green)}.trim-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.trim-box{background:#101a15;border:1px solid #2b3d32;padding:9px;border-radius:10px}.trim-box strong{font-size:13px}.trim-box input{width:100%;margin-top:6px;accent-color:var(--green)}
+.tool-list{display:grid;grid-template-columns:1fr 1fr;gap:8px}.tool-list button{font-size:12px;text-align:left;min-height:44px}.tool-list button span{display:block;color:var(--muted);font-size:10px;font-weight:500;margin-top:2px}
+.color-row{display:flex;gap:8px;align-items:center}.color-row input{width:38px;height:34px;padding:0;border:0;background:none}.hint{font-size:11px;color:#d5c28e;background:#3a301c66;border:1px solid #68532b;border-radius:10px;padding:10px;margin-top:10px}
+.status{font-size:11px;color:var(--green);min-height:16px;margin-top:8px}.footnote{font-size:11px;color:var(--muted);line-height:1.55;margin:14px 2px}.section-divider{height:1px;background:#293a30;margin:14px 0}
+@media(max-width:800px){.layout{grid-template-columns:1fr}.intro{align-items:start;flex-direction:column}.side{grid-template-columns:1fr 1fr}.side .panel:first-child{grid-column:1/-1}}
+@media(max-width:540px){main{padding:15px 11px 38px}.side{grid-template-columns:1fr}.side .panel:first-child{grid-column:auto}.panel{border-radius:15px}.panel-head{padding:13px}.stage-wrap{padding:8px}.stage{aspect-ratio:4/3}.control-row{align-items:stretch}.control-row .left,.control-row .right{flex:1}.control-row button{flex:1}.tool-list button{padding:10px 9px}}
+</style>
+</head>
+<body>
+<header><div class="brand"><div class="logo">⌁</div><div>SWING LAB<small>GOLF VIDEO ANALYZER</small></div></div><div class="header-tag">WEB PROTOTYPE · MOBILE READY</div></header>
+<main>
+ <div class="intro"><div><h1>스윙 분석 스튜디오</h1><p>영상을 불러오고, 어드레스 기준선을 설정해 스윙을 살펴보세요.</p></div><button class="ghost small-btn" id="resetAll">↺ 초기화</button></div>
+ <div class="layout">
+  <section class="panel">
+   <div class="panel-head"><div><h2>① 스윙 영상</h2><div class="sub">후면 촬영 영상을 권장합니다</div></div><button class="small-btn" id="pickVideo">＋ 영상 불러오기</button><input id="fileInput" type="file" accept="video/*" hidden></div>
+   <div class="stage-wrap"><div class="stage" id="stage">
+    <video id="video" playsinline></video><canvas id="overlay"></canvas>
+    <div class="empty" id="empty"><div class="glyph">▶</div><strong>골프 스윙 영상을 불러오세요</strong><span>MP4 · MOV 등 브라우저에서 재생 가능한 영상</span><button class="primary" id="uploadCta">영상 선택</button></div>
+   </div></div>
+   <div class="video-controls">
+    <input class="scrub" id="seek" type="range" min="0" max="1000" value="0">
+    <div class="control-row"><div class="left"><button class="small-btn" id="play">▶ 재생</button><button class="small-btn" id="back">−1프레임</button><button class="small-btn" id="forward">＋1프레임</button></div><div class="right"><span class="time" id="clock">00:00.00 / 00:00.00</span></div></div>
+   </div>
+  </section>
+  <aside class="side">
+   <section class="panel">
+    <div class="panel-head"><h2>② 기준선 설정</h2><span class="sub">어드레스 프레임</span></div>
+    <div class="section">
+     <p>영상을 어드레스 순간에 멈춘 뒤 자동 기준선을 생성하세요.</p>
+     <button class="primary" style="width:100%" id="autoLines">✦ 자동 기준선 그리기</button>
+     <div class="two" style="margin-top:8px"><button class="small-btn" id="toggleLines">기준선 숨기기</button><button class="small-btn" id="clearLines">기준선 삭제</button></div>
+     <div class="hint">시제품 안내: 현재 자동 기준선은 위치 예시를 표시합니다. 실제 공·손목·어깨 AI 인식은 아직 연결되지 않았습니다.</div>
+     <div class="section-divider"></div>
+     <h3>직접 선 그리기</h3><p>선 도구를 선택한 다음 영상 위에서 시작점과 끝점을 터치/클릭하세요.</p>
+     <div class="tool-list">
+      <button id="drawLine">╱ 선 그리기<span>두 점을 지정</span></button>
+      <button id="drawArrow">↗ 화살표 그리기<span>방향 표시</span></button>
+     </div>
+     <div class="color-row" style="margin-top:10px"><label class="field-label" for="lineColor">선 색상</label><input id="lineColor" type="color" value="#a9e56b"><label class="field-label" for="lineWidth">굵기</label><input id="lineWidth" type="range" min="1" max="8" value="3" class="range"></div>
+     <div class="status" id="drawStatus">도구를 선택하세요.</div>
+    </div>
+   </section>
+   <section class="panel">
+    <div class="panel-head"><h2>③ 클럽 헤드 궤적</h2><span class="sub">백스윙 / 다운스윙</span></div>
+    <div class="section">
+     <p>영상 프레임마다 클럽 헤드 위치를 찍어 궤적을 미리 표시할 수 있습니다.</p>
+     <div class="two"><button id="trackPoint">＋ 궤적 점 추가</button><button id="finishTrack">궤적 완료</button></div>
+     <div class="two" style="margin-top:8px"><button id="clearTrack">궤적 지우기</button><button id="toggleTrack">궤적 숨기기</button></div>
+     <div class="status" id="trackStatus">현재 0개 지점</div>
+     <div class="hint">자동 클럽 헤드 추적 AI는 다음 개발 단계입니다. 현재는 사용자가 프레임별 위치를 지정하는 미리보기 기능입니다.</div>
+    </div>
+   </section>
+   <section class="panel">
+    <div class="panel-head"><h2>④ 영상 자르기 및 저장</h2></div>
+    <div class="section">
+     <p>앞·뒤 구간을 지정하고 선과 궤적을 합성한 별도 영상을 저장합니다.</p>
+     <div class="trim-row">
+      <div class="trim-box"><span class="field-label">시작 시간</span><strong id="startLabel">0.00초</strong><input id="trimStart" type="range" min="0" max="1000" value="0"></div>
+      <div class="trim-box"><span class="field-label">종료 시간</span><strong id="endLabel">영상 끝</strong><input id="trimEnd" type="range" min="0" max="1000" value="1000"></div>
+     </div>
+     <button class="primary" id="export" style="width:100%;margin-top:12px">⬇ 분석 영상 저장 (MP4/WebM)</button>
+     <div class="status" id="exportStatus"></div>
+    </div>
+   </section>
+  </aside>
+ </div>
+ <p class="footnote">이 파일은 기능 확인용 웹 시제품입니다. 영상은 브라우저 안에서 처리되며 서버로 업로드하지 않습니다. 브라우저·기기별 코덱 지원에 따라 내보내기는 WebM으로 제공될 수 있습니다. 실제 관절 인식과 클럽 헤드 자동 추적에는 별도 AI 모델 연동이 필요합니다.</p>
+</main>
+<script>
+const $=id=>document.getElementById(id), video=$('video'), canvas=$('overlay'), ctx=canvas.getContext('2d');
+let videoUrl=null, lines=[], track=[], showLines=true, showTrack=true, tool=null, pending=null, frameRate=30, exportStream=null;
+function fmt(t){if(!isFinite(t))t=0;return `${String(Math.floor(t/60)).padStart(2,'0')}:${String(Math.floor(t%60)).padStart(2,'0')}.${String(Math.floor((t%1)*100)).padStart(2,'0')}`}
+function sizeCanvas(){const r=$('stage').getBoundingClientRect(),d=window.devicePixelRatio||1;canvas.width=Math.max(1,Math.round(r.width*d));canvas.height=Math.max(1,Math.round(r.height*d));draw()}
+function draw(){
+ const w=canvas.width,h=canvas.height;ctx.clearRect(0,0,w,h);if(!w||!h)return;
+ const color=$('lineColor').value,scale=Math.min(w/800,h/450);
+ const drawSeg=(a,b,c=color,width=3)=>{ctx.strokeStyle=c;ctx.lineWidth=width*scale;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(a.x*w,a.y*h);ctx.lineTo(b.x*w,b.y*h);ctx.stroke()};
+ if(showLines){lines.forEach((l,i)=>{drawSeg(l.a,l.b,l.color||color,l.width||3);ctx.fillStyle=l.color||color;[l.a,l.b].forEach(p=>{ctx.beginPath();ctx.arc(p.x*w,p.y*h,4*scale,0,Math.PI*2);ctx.fill()})})}
+ if(showTrack&&track.length){ctx.strokeStyle='#ffbd70';ctx.lineWidth=3*scale;ctx.lineJoin='round';ctx.beginPath();track.forEach((p,i)=>i?ctx.lineTo(p.x*w,p.y*h):ctx.moveTo(p.x*w,p.y*h));ctx.stroke();track.forEach((p,i)=>{ctx.fillStyle='#ffbd70';ctx.beginPath();ctx.arc(p.x*w,p.y*h,4*scale,0,Math.PI*2);ctx.fill();ctx.fillStyle='#24190e';ctx.font=`${9*scale}px sans-serif`;ctx.fillText(i+1,p.x*w+5*scale,p.y*h-5*scale)})}
+ if(pending){ctx.fillStyle='#a9e56b';ctx.beginPath();ctx.arc(pending.x*w,pending.y*h,5*scale,0,Math.PI*2);ctx.fill()}
+}
+function coords(e){const r=canvas.getBoundingClientRect();return{x:Math.max(0,Math.min(1,(e.clientX-r.left)/r.width)),y:Math.max(0,Math.min(1,(e.clientY-r.top)/r.height))}}
+$('pickVideo').onclick=$('uploadCta').onclick=()=>$('fileInput').click();
+$('fileInput').onchange=e=>{const f=e.target.files[0];if(!f)return;if(videoUrl)URL.revokeObjectURL(videoUrl);videoUrl=URL.createObjectURL(f);video.src=videoUrl;video.load();$('empty').style.display='none';lines=[];track=[];};
+video.onloadedmetadata=()=>{ $('seek').value=0;$('trimStart').value=0;$('trimEnd').value=1000;updateTime();sizeCanvas();};
+video.ontimeupdate=()=>{if(video.duration){$('seek').value=video.currentTime/video.duration*1000;updateTime();}};
+function updateTime(){$('clock').textContent=`${fmt(video.currentTime)} / ${fmt(video.duration)}`;let d=video.duration||0,a=+$('trimStart').value/1000*d,b=+$('trimEnd').value/1000*d;$('startLabel').textContent=a.toFixed(2)+'초';$('endLabel').textContent=(b>=d-.01?'영상 끝':b.toFixed(2)+'초')}
+$('seek').oninput=e=>{if(video.duration)video.currentTime=e.target.value/1000*video.duration};
+$('play').onclick=()=>{if(!video.src)return;if(video.paused)video.play();else video.pause()};
+video.onplay=()=>$('play').textContent='Ⅱ 일시정지';video.onpause=()=>$('play').textContent='▶ 재생';
+$('back').onclick=()=>{video.pause();video.currentTime=Math.max(0,video.currentTime-1/frameRate)};
+$('forward').onclick=()=>{video.pause();video.currentTime=Math.min(video.duration||0,video.currentTime+1/frameRate)};
+$('autoLines').onclick=()=>{if(!video.src){alert('먼저 영상을 불러오세요.');return}video.pause();
+ // Visual placeholder only: creates two example lines, not inferred body landmarks.
+ lines=[{a:{x:.18,y:.82},b:{x:.52,y:.55},color:'#a9e56b',width:3},{a:{x:.18,y:.82},b:{x:.70,y:.27},color:'#86c9ff',width:3}];showLines=true;$('toggleLines').textContent='기준선 숨기기';draw();
+ $('drawStatus').textContent='예시 기준선 2개를 표시했습니다. 실제 AI 인식 결과는 아닙니다.';};
+$('toggleLines').onclick=()=>{showLines=!showLines;$('toggleLines').textContent=showLines?'기준선 숨기기':'기준선 보이기';draw()};
+$('clearLines').onclick=()=>{lines=[];pending=null;draw();$('drawStatus').textContent='기준선을 삭제했습니다.'};
+$('drawLine').onclick=()=>{tool='line';pending=null;$('drawLine').classList.add('active');$('drawArrow').classList.remove('active');$('drawStatus').textContent='영상에서 시작점과 끝점을 차례로 선택하세요.'};
+$('drawArrow').onclick=()=>{tool='arrow';pending=null;$('drawArrow').classList.add('active');$('drawLine').classList.remove('active');$('drawStatus').textContent='화살표 시작점과 끝점을 선택하세요.'};
+canvas.addEventListener('pointerdown',e=>{if(!tool)return;const p=coords(e);if(!pending){pending=p;draw()}else{const color=$('lineColor').value,width=+$('lineWidth').value;lines.push({a:pending,b:p,color,width,arrow:tool==='arrow'});pending=null;tool=null;$('drawLine').classList.remove('active');$('drawArrow').classList.remove('active');$('drawStatus').textContent='선을 추가했습니다.';draw()}});
+$('trackPoint').onclick=()=>{if(!video.src){alert('먼저 영상을 불러오세요.');return}tool='track';pending=null;$('drawStatus').textContent='영상 위에서 현재 프레임의 클럽 헤드 위치를 선택하세요.';$('trackStatus').textContent=`현재 ${track.length}개 지점 · 영상에서 위치 선택`;
+canvas.style.pointerEvents='auto';};
+canvas.addEventListener('pointerup',e=>{if(tool==='track'){track.push(coords(e));tool=null;canvas.style.pointerEvents='none';$('trackStatus').textContent=`현재 ${track.length}개 지점`;draw()}});
+$('finishTrack').onclick=()=>{tool=null;canvas.style.pointerEvents='none';$('trackStatus').textContent=`궤적 완료 · ${track.length}개 지점`;draw()};
+$('clearTrack').onclick=()=>{track=[];tool=null;canvas.style.pointerEvents='none';$('trackStatus').textContent='현재 0개 지점';draw()};
+$('toggleTrack').onclick=()=>{showTrack=!showTrack;$('toggleTrack').textContent=showTrack?'궤적 숨기기':'궤적 보이기';draw()};
+$('lineColor').oninput=draw;$('lineWidth').oninput=draw;
+$('trimStart').oninput=()=>{updateTime();if(video.duration)video.currentTime=Math.min(video.duration*(+$('trimStart').value/1000),video.duration)};
+$('trimEnd').oninput=updateTime;
+$('resetAll').onclick=()=>{lines=[];track=[];showLines=showTrack=true;tool=null;pending=null;draw();$('trackStatus').textContent='현재 0개 지점';$('drawStatus').textContent='도구를 선택하세요.'};
+function paintFrame(){const r=$('stage').getBoundingClientRect(),d=window.devicePixelRatio||1,w=Math.round(r.width*d),h=Math.round(r.height*d);const c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');x.fillStyle='#000';x.fillRect(0,0,w,h);
+ // Match object-fit:contain
+ const vw=video.videoWidth,vh=video.videoHeight;if(vw&&vh){const s=Math.min(w/vw,h/vh),dw=vw*s,dh=vh*s;x.drawImage(video,(w-dw)/2,(h-dh)/2,dw,dh)}
+ const map=p=>({x:(p.x*w),y:(p.y*h)});const seg=(a,b,color,width)=>{const A=map(a),B=map(b);x.strokeStyle=color;x.lineWidth=width*d;x.lineCap='round';x.beginPath();x.moveTo(A.x,A.y);x.lineTo(B.x,B.y);x.stroke()};
+ if(showLines)lines.forEach(l=>seg(l.a,l.b,l.color||'#a9e56b',l.width||3));
+ if(showTrack&&track.length){x.strokeStyle='#ffbd70';x.lineWidth=3*d;x.beginPath();track.forEach((p,i)=>{const q=map(p);i?x.lineTo(q.x,q.y):x.moveTo(q.x,q.y)});x.stroke()}
+ return c}
+$('export').onclick=async()=>{if(!video.src){alert('먼저 영상을 불러오세요.');return}const d=video.duration||0,start=+$('trimStart').value/1000*d,end=+$('trimEnd').value/1000*d;if(end<=start){alert('종료 시간은 시작 시간보다 뒤여야 합니다.');return}
+ const c=paintFrame(),cx=c.getContext('2d');let stream=c.captureStream(30);try{const mime=MediaRecorder.isTypeSupported('video/mp4;codecs=avc1')?'video/mp4':'video/webm';const recorder=new MediaRecorder(stream,{mimeType:mime});const chunks=[];recorder.ondataavailable=e=>{if(e.data.size)chunks.push(e.data)};recorder.onstop=()=>{const blob=new Blob(chunks,{type:mime}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`swing-analysis.${mime==='video/mp4'?'mp4':'webm'}`;a.click();setTimeout(()=>URL.revokeObjectURL(url),5000);$('exportStatus').textContent=`내보내기 완료 (${mime.split('/')[1].toUpperCase()})`;stream.getTracks().forEach(t=>t.stop())};
+ // redraw current video frame + overlay each animation frame
+ const old=video.currentTime;video.pause();video.currentTime=start;await new Promise(resolve=>{video.onseeked=resolve});let running=true;const render=()=>{if(!running)return;const frame=paintFrame();cx.clearRect(0,0,c.width,c.height);cx.drawImage(frame,0,0);if(video.currentTime>=end){running=false;recorder.stop();video.pause();return}requestAnimationFrame(render)};
+ recorder.start(100);video.play();render();$('exportStatus').textContent='영상 합성 및 녹화 중입니다. 완료될 때까지 페이지를 유지하세요.';
+ video.ontimeupdate=()=>{if(video.currentTime>=end){video.pause();running=false;if(recorder.state!=='inactive')recorder.stop();video.currentTime=old}};
+ }catch(err){$('exportStatus').textContent='이 브라우저에서는 영상 내보내기를 지원하지 않습니다. 데스크톱 Chrome 또는 Android Chrome을 사용해 보세요.';console.error(err)}};
+window.addEventListener('resize',sizeCanvas);new ResizeObserver(sizeCanvas).observe($('stage'));sizeCanvas();
+</script>
+</body></html>
