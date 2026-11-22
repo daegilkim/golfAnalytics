@@ -26,13 +26,13 @@ main{max-width:1180px;margin:auto;padding:20px 16px 54px}.intro{display:flex;jus
 <body>
 <header><div class="brand"><div class="logo">⌁</div><div>SWING LAB<small>GOLF VIDEO ANALYZER</small></div></div><div class="header-tag">WEB PROTOTYPE · MOBILE READY</div></header>
 <main>
- <div class="intro"><div><h1>스윙 분석 스튜디오</h1><p>영상을 불러오고, 어드레스 기준선을 설정해 스윙을 살펴보세요.</p></div><button class="ghost small-btn" id="resetAll">↺ 초기화</button></div>
+ <div class="intro"><div><h1>스윙 분석 스튜디오</h1><p>갤러리에서 스윙 영상을 선택하고, 어드레스 기준선을 설정해 분석해 보세요.</p></div><button class="ghost small-btn" id="resetAll">↺ 초기화</button></div>
  <div class="layout">
   <section class="panel">
-   <div class="panel-head"><div><h2>① 스윙 영상</h2><div class="sub">후면 촬영 영상을 권장합니다</div></div><button class="small-btn" id="pickVideo">＋ 영상 불러오기</button><input id="fileInput" type="file" accept="video/*" hidden></div>
+   <div class="panel-head"><div><h2>① 스윙 영상</h2><div class="sub">후면 촬영 영상 권장 · 갤럭시 / 아이폰 지원</div></div><button class="small-btn" id="pickVideo">▣ 갤러리에서 영상 선택</button><input id="fileInput" type="file" accept="video/*,.mp4,.mov,.m4v,.webm" hidden></div>
    <div class="stage-wrap"><div class="stage" id="stage">
     <video id="video" playsinline></video><canvas id="overlay"></canvas>
-    <div class="empty" id="empty"><div class="glyph">▶</div><strong>골프 스윙 영상을 불러오세요</strong><span>MP4 · MOV 등 브라우저에서 재생 가능한 영상</span><button class="primary" id="uploadCta">영상 선택</button></div>
+    <div class="empty" id="empty"><div class="glyph">▶</div><strong>골프 스윙 영상을 불러오세요</strong><span>갤럭시: 갤러리 / 아이폰: 사진 앱에서 동영상 선택</span><button class="primary" id="uploadCta">갤러리에서 영상 선택</button></div>
    </div></div>
    <div class="video-controls">
     <input class="scrub" id="seek" type="range" min="0" max="1000" value="0">
@@ -81,7 +81,7 @@ main{max-width:1180px;margin:auto;padding:20px 16px 54px}.intro{display:flex;jus
    </section>
   </aside>
  </div>
- <p class="footnote">이 파일은 기능 확인용 웹 시제품입니다. 영상은 브라우저 안에서 처리되며 서버로 업로드하지 않습니다. 브라우저·기기별 코덱 지원에 따라 내보내기는 WebM으로 제공될 수 있습니다. 실제 관절 인식과 클럽 헤드 자동 추적에는 별도 AI 모델 연동이 필요합니다.</p>
+ <p class="footnote">이 파일은 기능 확인용 웹 시제품입니다. 영상 선택 버튼은 기기의 기본 사진·동영상 선택기를 호출합니다(갤럭시에서는 갤러리/사진 선택 화면, 아이폰에서는 사진 선택 화면이 표시될 수 있습니다). 영상은 브라우저 안에서 처리되며 서버로 업로드하지 않습니다. 브라우저·기기별 코덱 지원에 따라 내보내기는 WebM으로 제공될 수 있습니다. 실제 관절 인식과 클럽 헤드 자동 추적에는 별도 AI 모델 연동이 필요합니다.</p>
 </main>
 <script>
 const $=id=>document.getElementById(id), video=$('video'), canvas=$('overlay'), ctx=canvas.getContext('2d');
